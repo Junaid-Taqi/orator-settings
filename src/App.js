@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import DisplayNav from './components/DisplayNav/DisplayNav';
 
@@ -9,14 +9,12 @@ import DisplayNav from './components/DisplayNav/DisplayNav';
  * in a single CSS file (`App.css`).
  */
 function App() {
-  return (
-    <div className="App container-fluid px-0">
-      <div className="row gx-0">
-        <div className="col-12 col-md-3">
-          <DisplayNav />
-        </div>
-        <main className="col-12 col-md-9 p-4">
-          {/* sample section representing the "General" settings from screenshot */}
+  const [selectedSection, setSelectedSection] = useState('general');
+
+  const renderSection = () => {
+    switch (selectedSection) {
+      case 'general':
+        return (
           <section id="general" className="card-wrapper">
             <h2 className="mb-4">General Settings</h2>
             <form>
@@ -116,6 +114,34 @@ function App() {
               </button>
             </form>
           </section>
+        );
+      case 'branding':
+        return <section className="card-wrapper"><h2>Branding & Logos</h2><p>Placeholder content...</p></section>;
+      case 'template':
+        return <section className="card-wrapper"><h2>Template Styles</h2><p>Placeholder content...</p></section>;
+      case 'categories':
+        return <section className="card-wrapper"><h2>Category Defaults</h2><p>Placeholder content...</p></section>;
+      case 'display':
+        return <section className="card-wrapper"><h2>Display Settings</h2><p>Placeholder content...</p></section>;
+      case 'notifications':
+        return <section className="card-wrapper"><h2>Notifications</h2><p>Placeholder content...</p></section>;
+      case 'users':
+        return <section className="card-wrapper"><h2>User Management</h2><p>Placeholder content...</p></section>;
+      case 'security':
+        return <section className="card-wrapper"><h2>Security</h2><p>Placeholder content...</p></section>;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="App container-fluid px-0">
+      <div className="row gx-0">
+        <div className="col-12 col-md-3">
+          <DisplayNav active={selectedSection} onSelect={setSelectedSection} />
+        </div>
+        <main className="col-12 col-md-9 p-4">
+          {renderSection()}
         </main>
       </div>
     </div>
