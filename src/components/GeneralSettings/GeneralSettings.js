@@ -103,6 +103,7 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
               placeholder="Municipality of Tisno"
               value={formData.siteName}
               onChange={handleChange}
+              maxLength={255}
             />
           </div>
           <div className="mb-3">
@@ -116,6 +117,7 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
               placeholder="https://municipality.gov"
               value={formData.webUrl}
               onChange={handleChange}
+              maxLength={255}
             />
           </div>
           <div className="row">
@@ -130,6 +132,7 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
                 placeholder="contact@municipality.gov"
                 value={formData.email}
                 onChange={handleChange}
+                maxLength={255}
               />
             </div>
             <div className="col-md-6 mb-3">
@@ -143,6 +146,7 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
                 placeholder="+1 (555) 123-4567"
                 value={formData.phoneNo}
                 onChange={handleChange}
+                maxLength={255}
               />
             </div>
           </div>
