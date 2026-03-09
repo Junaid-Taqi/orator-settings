@@ -76,18 +76,18 @@ function AppContent() {
         return <GeneralSettings />;
       case 'branding':
         return <BrandingLogo />;
-      case 'template':
-        return <TemplateStyles />;
-      case 'categories':
-        return <DefaultCategory />;
-      case 'display':
-        return <DisplaySettings />;
-      case 'notifications':
-        return <Notifications />;
-      case 'users':
-        return <UserManagement />;
-      case 'security':
-        return <Security />;
+      // case 'template':
+      //   return <TemplateStyles />;
+      // case 'categories':
+      //   return <DefaultCategory />;
+      // case 'display':
+      //   return <DisplaySettings />;
+      // case 'notifications':
+      //   return <Notifications />;
+      // case 'users':
+      //   return <UserManagement />;
+      // case 'security':
+      //   return <Security />;
       default:
         return null;
     }
