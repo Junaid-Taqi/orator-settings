@@ -14,6 +14,8 @@ import DisplaySettings from './components/DisplaySettings/DisplaySettings';
 import Notifications from './components/Notifications/Notifications';
 import UserManagement from './components/UserManagement/UserManagement';
 import Security from './components/Security/Security';
+import { useTranslation } from './Services/Localization/Localization';
+import Header from './components/Header/Header';
 
 /**
  * Top-level application component inner content.
@@ -23,10 +25,11 @@ function AppContent() {
   const { token, expiresIn, status, error } = useSelector((state) => state.auth);
   const [selectedSection, setSelectedSection] = useState('general');
 
-  // Lifted municipality details state
   const [detailsData, setDetailsData] = useState(null);
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [detailsError, setDetailsError] = useState('');
+
+  const t = useTranslation();
 
   const user = useMemo(() => {
     return JSON.parse(sessionStorage.getItem("liferayUser")) || {
@@ -48,7 +51,6 @@ function AppContent() {
 
   useEffect(() => {
     if (token && expiresIn) {
-      // Refresh token 60 seconds before it expires
       const refreshTime = (expiresIn - 60) * 1000;
 
       if (refreshTime > 0) {
@@ -85,28 +87,31 @@ function AppContent() {
       if (response.data?.success && response.data?.code === 200) {
         setDetailsData(response.data.data);
       } else {
-        setDetailsError(response.data?.message || 'Failed to load details.');
+        setDetailsError(response.data?.message || t('errorFailedToLoadDetails'));
       }
     } catch (err) {
-      setDetailsError('Network error loading details.');
+      setDetailsError(t('errorNetworkErrorLoadingDetails'));
       console.error(err);
     } finally {
       setDetailsLoading(false);
     }
-  }, [token, user]);
+
+  }, [token, user, t]);
 
   useEffect(() => {
-    // Fetch details once auth token is fully initialized and present
     if (token && status === 'succeeded') {
       fetchDetails();
     }
   }, [token, status, fetchDetails]);
 
   const isBootstrappingAuth = !token && (status === 'idle' || status === 'loading');
+
   if (isBootstrappingAuth) {
     return (
       <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center' }}>
-        <div style={{ fontSize: '16px', fontWeight: 600 }}>Loading...</div>
+        <div style={{ fontSize: '16px', fontWeight: 600 }}>
+          {t('commonLoading')}
+        </div>
       </div>
     );
   }
@@ -114,7 +119,9 @@ function AppContent() {
   if (!token && status === 'failed') {
     return (
       <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#b91c1c' }}>
-        <div>Failed to load token{error ? `: ${error}` : ''}</div>
+        <div>
+          {t('errorFailedToLoadToken')}{error ? `: ${error}` : ''}
+        </div>
       </div>
     );
   }
@@ -125,18 +132,6 @@ function AppContent() {
         return <GeneralSettings user={user} detailsData={detailsData} detailsLoading={detailsLoading} fetchDetails={fetchDetails} detailsError={detailsError} />;
       case 'branding':
         return <BrandingLogo user={user} detailsData={detailsData} detailsLoading={detailsLoading} fetchDetails={fetchDetails} detailsError={detailsError} />;
-      // case 'template':
-      //   return <TemplateStyles />;
-      // case 'categories':
-      //   return <DefaultCategory />;
-      // case 'display':
-      //   return <DisplaySettings />;
-      // case 'notifications':
-      //   return <Notifications />;
-      // case 'users':
-      //   return <UserManagement />;
-      // case 'security':
-      //   return <Security />;
       default:
         return null;
     }
@@ -144,6 +139,7 @@ function AppContent() {
 
   return (
     <div className="App container-fluid px-0">
+      <Header user={user} />
       <div className="row gx-0">
         <div className="col-12 col-md-3">
           <DisplayNav active={selectedSection} onSelect={setSelectedSection} user={user} />

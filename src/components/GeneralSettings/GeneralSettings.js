@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { serverUrl } from '../../Services/Constants/Constants';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, detailsError }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
 
   const [status, setStatus] = useState('idle'); // 'idle' | 'success' | 'error' | 'saving'
   const [message, setMessage] = useState('');
+  const t = useTranslation();
 
   const groupId = user?.groups?.[0]?.id;
   const userId = user?.userId;
@@ -63,25 +65,25 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
 
       if (response.data?.success) {
         setStatus('success');
-        setMessage('Settings saved successfully!');
+        setMessage(t('generalSettingsSuccessMessage'));
         if (fetchDetails) fetchDetails();
       } else {
         setStatus('error');
-        setMessage(response.data?.message || 'Failed to save settings.');
+        setMessage(response.data?.message || t('generalSettingsErrorMessage'));
       }
     } catch (err) {
       setStatus('error');
-      setMessage('Network error saving details.');
+      setMessage(t('generalSettingsNetworkErrorMessage'));
       console.error(err);
     }
   };
 
   return (
     <section id="general" className="card-wrapper">
-      <h2 className="mb-4">General Settings</h2>
+      <h2 className="mb-4">{t('generalSettingsTitle')}</h2>
 
       {detailsLoading ? (
-        <div className="text-center p-4">Loading details...</div>
+        <div className="text-center p-4">{t('generalSettingsLoadingDetails')}</div>
       ) : detailsError ? (
         <div className="alert alert-danger mb-4">{detailsError}</div>
       ) : (
@@ -94,64 +96,70 @@ const GeneralSettings = ({ user, detailsData, detailsLoading, fetchDetails, deta
 
           <div className="mb-3">
             <label htmlFor="siteName" className="form-label">
-              Municipality Name
+              {t('generalSettingsMunicipalityName')}
             </label>
             <input
               type="text"
               className="form-control"
               id="siteName"
-              placeholder="Municipality of Tisno"
+              placeholder={t('generalSettingsPlaceholdersMunicipalityName')}
               value={formData.siteName}
               onChange={handleChange}
               maxLength={255}
             />
           </div>
+
           <div className="mb-3">
             <label htmlFor="webUrl" className="form-label">
-              Official Website URL
+              {t('generalSettingsOfficialWebsite')}
             </label>
             <input
               type="url"
               className="form-control"
               id="webUrl"
-              placeholder="https://municipality.gov"
+              placeholder={t('generalSettingsPlaceholdersWebsite')}
               value={formData.webUrl}
               onChange={handleChange}
               maxLength={255}
             />
           </div>
+
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="email" className="form-label">
-                Contact Email
+                {t('generalSettingsContactEmail')}
               </label>
               <input
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="contact@municipality.gov"
+                placeholder={t('generalSettingsPlaceholdersEmail')}
                 value={formData.email}
                 onChange={handleChange}
                 maxLength={255}
               />
             </div>
+
             <div className="col-md-6 mb-3">
               <label htmlFor="phoneNo" className="form-label">
-                Contact Phone
+                {t('generalSettingsContactPhone')}
               </label>
               <input
                 type="tel"
                 className="form-control"
                 id="phoneNo"
-                placeholder="+1 (555) 123-4567"
+                placeholder={t('generalSettingsPlaceholdersPhone')}
                 value={formData.phoneNo}
                 onChange={handleChange}
                 maxLength={255}
               />
             </div>
           </div>
+
           <button type="submit" className="btn btn-success" disabled={status === 'saving'}>
-            {status === 'saving' ? 'Saving...' : 'Save Changes'}
+            {status === 'saving'
+              ? t('generalSettingsSaving')
+              : t('generalSettingsSaveChanges')}
           </button>
         </form>
       )}

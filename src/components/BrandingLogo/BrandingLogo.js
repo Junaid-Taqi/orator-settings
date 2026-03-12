@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { serverUrl } from '../../Services/Constants/Constants';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 const BrandingLogo = ({ user, detailsData, detailsLoading, fetchDetails, detailsError }) => {
+    const t = useTranslation();
     // States for three different uploads
     const [primaryLogoPreview, setPrimaryLogoPreview] = useState(null);
     const [primaryLogoFile, setPrimaryLogoFile] = useState(null);
@@ -102,8 +104,8 @@ const BrandingLogo = ({ user, detailsData, detailsLoading, fetchDetails, details
 
     return (
         <section className="container-fluid p-5 branding-section min-vh-100 text-white">
-            <h2 className="fw-bold mb-1">Branding & Logos</h2>
-            <p className="text-info opacity-75 mb-4">Upload and manage logos used across templates</p>
+            <h2 className="fw-bold mb-1">{t('branding')}</h2>
+            <p className="text-info opacity-75 mb-4">{t('upload')}</p>
 
             {detailsLoading ? (
                 <div className="text-center p-4">Loading details...</div>
@@ -119,35 +121,35 @@ const BrandingLogo = ({ user, detailsData, detailsLoading, fetchDetails, details
 
                     {/* --- PRIMARY LOGO SECTION --- */}
                     <div className="main-card p-4 rounded-4 shadow-lg mb-5">
-                        <h4 className="mb-1 fw-semibold">Municipality Logo</h4>
-                        <p className="small text-secondary mb-4">Used as default cover image and in template headers</p>
+                        <h4 className="mb-1 fw-semibold">{t('municipalityLogo')}</h4>
+                        <p className="small text-secondary mb-4">{t('municipalityLogoDescription')}</p>
                         <div className="row g-4 mt-2">
                             <div className="col-md-6">
-                                <label className="text-info small fw-bold mb-2 d-block">Current Logo</label>
+                                <label className="text-info small fw-bold mb-2 d-block">{t('currentLogo')}</label>
                                 <div className="upload-box d-flex align-items-center justify-content-center overflow-hidden">
                                     {primaryLogoPreview ? (
                                         <img src={primaryLogoPreview} className="img-fluid p-3 h-100" alt="Primary" />
                                     ) : (
                                         <div className="text-center">
                                             <i className="bi bi-building fs-1 text-info opacity-50 d-block"></i>
-                                            <span className="text-info small">No logo uploaded</span>
+                                            <span className="text-info small">{t('noLogoUploaded')}</span>
                                         </div>
                                     )}
                                 </div>
                             </div>
                             <div className="col-md-6">
-                                <label className="text-info small fw-bold mb-2 d-block">Upload New</label>
+                                <label className="text-info small fw-bold mb-2 d-block">{t('uploadNewLogo')}</label>
                                 <input type="file" className="d-none" ref={primaryRef} onChange={handleFileChange} accept="image/png, image/svg+xml" />
                                 <div className="upload-box upload-clickable d-flex flex-column align-items-center justify-content-center text-center" onClick={() => primaryRef.current.click()}>
                                     <i className="bi bi-upload fs-1 text-info mb-3"></i>
-                                    <p className="mb-0 fw-bold">Click to upload or drag & drop</p>
+                                    <p className="mb-0 fw-bold">{t('clickToUpload')}</p>
                                     <p className="small text-secondary">PNG, SVG (MAX 5MB)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-success" disabled={status === 'saving' || (!primaryLogoFile && status !== 'error')}>
-                        {status === 'saving' ? 'Saving...' : 'Save Changes'}
+                        {status === 'saving' ? 'Saving...' : t('saveChanges')}
                     </button>
                 </form>
             )}

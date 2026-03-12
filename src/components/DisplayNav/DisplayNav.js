@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../../Services/Localization/Localization';
 
 /**
  * Simple sidebar navigation used on the settings screen.
@@ -6,9 +7,10 @@ import React from 'react';
  * via the single shared CSS file (App.css).
  */
 const DisplayNav = ({ active, onSelect }) => {
+  const t = useTranslation();
   const items = [
-    { key: 'general', icon: 'gear-fill', label: 'General' },
-    { key: 'branding', icon: 'images', label: 'Branding & Logos' },
+    { key: 'general', icon: 'gear-fill', label: t('general') },
+    { key: 'branding', icon: 'images', label: t('branding') },
     // { key: 'template', icon: 'palette', label: 'Template Styles' },
     // { key: 'categories', icon: 'list-ul', label: 'Category Defaults' },
     // { key: 'display', icon: 'display-fill', label: 'Display Settings' },
@@ -19,7 +21,7 @@ const DisplayNav = ({ active, onSelect }) => {
 
   return (
     <nav className="sidebar d-flex flex-column p-3">
-      <h5 className="text-light mb-4">Settings</h5>
+      <h5 className="text-light mb-4">{t('settings')}</h5>
       <ul className="nav nav-pills flex-column">
         {items.map(item => (
           <li className="nav-item" key={item.key}>
