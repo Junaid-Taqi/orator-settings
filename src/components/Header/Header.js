@@ -44,7 +44,7 @@ const Header = ({ user }) => {
                 <div className="header-lang">
                     {/* <label htmlFor="lang-select" className="me-1" style={{fontSize:'0.85rem'}}>{t('language')}:</label> */}
                     <select id="lang-select" value={lang} onChange={handleLangChange} className="form-select form-select-sm">
-                        <option value="hr">Crotian</option>
+                        <option value="hr">Croatian</option>
                         <option value="en">English</option>
                     </select>
                 </div>
