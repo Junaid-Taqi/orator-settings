@@ -30,5 +30,10 @@
   "uploadNewLogo": "Učitajte Novi Logotip",
   "noLogoUploaded": "Nema učitanog logotipa",
   "clickToUpload": "Kliknite za učitavanje ili povucite i ispustite",
-  "saveChanges": "Spremi Promjene"
+  "saveChanges": "Spremi Promjene",
+  "portalCoverImage": "Naslovna slika portala",
+  "portalCoverImageDescription": "Koristi se kao glavna pozadinska slika za web portal",
+  "currentCoverImage": "Trenutna naslovna slika",
+  "uploadNewCoverImage": "Učitajte novu naslovnu sliku",
+  "noCoverImageUploaded": "Nema učitane naslovne slike"
 }

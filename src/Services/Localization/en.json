@@ -30,5 +30,10 @@
   "uploadNewLogo": "Upload New Logo",
   "noLogoUploaded": "No logo uploaded",
   "clickToUpload": "Click to upload or drag & drop",
-  "saveChanges": "Save Changes"
+  "saveChanges": "Save Changes",
+  "portalCoverImage": "Portal Cover Image",
+  "portalCoverImageDescription": "Used as the main background image for the web portal",
+  "currentCoverImage": "Current Cover Image",
+  "uploadNewCoverImage": "Upload New Cover Image",
+  "noCoverImageUploaded": "No cover image uploaded"
 }

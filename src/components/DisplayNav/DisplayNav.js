@@ -11,12 +11,6 @@ const DisplayNav = ({ active, onSelect }) => {
   const items = [
     { key: 'general', icon: 'gear-fill', label: t('general') },
     { key: 'branding', icon: 'images', label: t('branding') },
-    // { key: 'template', icon: 'palette', label: 'Template Styles' },
-    // { key: 'categories', icon: 'list-ul', label: 'Category Defaults' },
-    // { key: 'display', icon: 'display-fill', label: 'Display Settings' },
-    // { key: 'notifications', icon: 'bell-fill', label: 'Notifications' },
-    // { key: 'users', icon: 'people-fill', label: 'User Management' },
-    // { key: 'security', icon: 'shield-lock-fill', label: 'Security' },
   ];
 
   return (

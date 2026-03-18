@@ -8,12 +8,6 @@ import { serverUrl } from './Services/Constants/Constants';
 import DisplayNav from './components/DisplayNav/DisplayNav';
 import GeneralSettings from './components/GeneralSettings/GeneralSettings';
 import BrandingLogo from './components/BrandingLogo/BrandingLogo';
-import TemplateStyles from './components/TemplateStyles/TemplateStyles';
-import DefaultCategory from './components/DefaultCategory/DefaultCategory';
-import DisplaySettings from './components/DisplaySettings/DisplaySettings';
-import Notifications from './components/Notifications/Notifications';
-import UserManagement from './components/UserManagement/UserManagement';
-import Security from './components/Security/Security';
 import { useTranslation } from './Services/Localization/Localization';
 import Header from './components/Header/Header';
 
